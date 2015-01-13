@@ -2,11 +2,11 @@
 #'
 #' geocodes an IP address using HostIP.info API \url{http://www.hostip.info}.
 #' 
-#' @param ip a character vector specifying a ip (e.g., "12.215.42.19"). 
-#' The default value is no ip is specified and the host ip is used.
+#' @param ip a character vector specifying an IP (e.g., "12.215.42.19"). 
+#' The default value is no IP is specified and the host IP is used.
 #' @param position whether or not output lat/lng infomation. The default value is TRUE.
 #' @return a vector with information of contry_name, country_code, city, and ip. 
-#' If numerous ips are inputted, a data.frame is returned. 
+#' If numerous IPs are inputted, a data.frame is returned. 
 #' @author Jun Cai (\email{cai-j12@@mails.tsinghua.edu.cn}), PhD student from 
 #' Center for Earth System Science, Tsinghua University
 #' @seealso \code{\link{geocode}}, \code{\link{revgeocode}}.

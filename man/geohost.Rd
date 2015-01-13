@@ -7,14 +7,14 @@
 geohost(ip = "", position = TRUE)
 }
 \arguments{
-\item{ip}{a character vector specifying a ip (e.g., "12.215.42.19").
-The default value is no ip is specified and the host ip is used.}
+\item{ip}{a character vector specifying an IP (e.g., "12.215.42.19").
+The default value is no IP is specified and the host IP is used.}
 
 \item{position}{whether or not output lat/lng infomation. The default value is TRUE.}
 }
 \value{
 a vector with information of contry_name, country_code, city, and ip.
-If numerous ips are inputted, a data.frame is returned.
+If numerous IPs are inputted, a data.frame is returned.
 }
 \description{
 geocodes an IP address using HostIP.info API \url{http://www.hostip.info}.
