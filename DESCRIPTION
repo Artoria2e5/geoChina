@@ -2,7 +2,7 @@ Package: geoChina
 Type: Package
 Title: A package for geocoding, reverse geocoding and coordinate
     transformations between WGS-84, GCJ-02 and BD-09 coordinate systems
-Version: 1.1.3
+Version: 1.2
 Date: 2015-01-15
 Author: Jun Cai <cai-j12@mails.tsinghua.edu.cn>
 Maintainer: Jun Cai <cai-j12@mails.tsinghua.edu.cn>
@@ -13,7 +13,7 @@ Description: In China the digital maps use two main Geographic Coordinate
     address or reverse geocoding latitude/longitude location by calling either
     Google or Baidu Geocoding API, geoChina allows for inputting or outputting
     the coordinates in the GCS different from the one that Google or Baidu map
-    uses.
+    uses. Besides, function for geocoding IP address is provided.
 License: GPL-3
 Depends:
     R (>= 2.11.0)

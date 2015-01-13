@@ -1,11 +1,11 @@
 #' Geocode
 #'
-#' geocodes an address using Google or Baidu Maps. Note that in most cases by 
+#' geocodes an address using Google or Baidu Maps API. Note that in most cases by 
 #' using this function you are agreeing to the Google Maps API Terms of Service 
 #' at \url{https://developers.google.com/maps/terms} or the Baidu Maps API Terms 
 #' of Use at \url{http://developer.baidu.com/map/law.htm}.
 #' 
-#' @param address a character string specifying a location of interest (e.g. 
+#' @param address a character vector specifying a location of interest (e.g., 
 #' "Tsinghua Univeristy")
 #' @param api use google or baidu maps api
 #' @param key an api key must be provided when calling baidu maps api. 
@@ -20,7 +20,7 @@
 #' @author Jun Cai (\email{cai-j12@@mails.tsinghua.edu.cn}), PhD student from 
 #' Center for Earth System Science, Tsinghua University
 #' @details note that the google maps api limits to 2500 queries a day.
-#' @seealso \code{\link{revgeocode}}.
+#' @seealso \code{\link{revgeocode}}, \code{\link{geohost}}.
 #' 
 #' Google Maps API at \url{http://code.google.com/apis/maps/documentation/geocoding/} 
 #' and Baidu Maps API at \url{http://developer.baidu.com/map/webservice-geocoding.htm}
@@ -78,7 +78,7 @@ geocode <- function(address, api = c('google', 'baidu'), key = '',
   address <- enc2utf8(address)
   # different google maps api is used based user's location. If user is inside China,
   # ditu.google.cn is used; otherwise maps.google.com is used.
-  cname <- fromJSON(readLines("http://api.hostip.info/get_json.php", warn = FALSE))['country_name']
+  cname <- geohost()['country_name']
   if(api == 'google'){
     if(cname != 'CHINA'){
       api_url <- 'http://maps.googleapis.com/maps/api/geocode/json'

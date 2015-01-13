@@ -1,6 +1,6 @@
 #' Reverse geocode
 #'
-#' reverse geocodes a lat/lng location using Google or Baidu Maps.  Note that in 
+#' reverse geocodes a lat/lng location using Google or Baidu Maps API.  Note that in 
 #' most cases by using this function you are agreeing to the Google Maps API Terms 
 #' of Service at \url{https://developers.google.com/maps/terms} or the Baidu Maps 
 #' API Terms of Use at \url{http://developer.baidu.com/map/law.htm}.
@@ -19,7 +19,7 @@
 #' @author Jun Cai (\email{cai-j12@@mails.tsinghua.edu.cn}), PhD student from 
 #' Center for Earth System Science, Tsinghua University
 #' @details note that the google maps api limits to 2500 queries a day.
-#' @seealso \code{\link{geocode}}.
+#' @seealso \code{\link{geocode}}, \code{\link{geohost}}.
 #' 
 #' Google Maps API at \url{http://code.google.com/apis/maps/documentation/geocoding/} 
 #' and Baidu Maps API at \url{http://developer.baidu.com/map/webservice-geocoding.htm}
@@ -65,7 +65,7 @@ revgeocode <- function(latlng, ics = c('WGS-84', 'GCJ-02', 'BD-09'),
   
   # different google maps api is used based user's location. If user is inside China,
   # ditu.google.cn is used; otherwise maps.google.com is used.
-  cname <- fromJSON(readLines("http://api.hostip.info/get_json.php", warn = FALSE))['country_name']
+  cname <- geohost['country_name']
   if(api == 'google'){
     if(cname != 'CHINA'){
       api_url <- 'http://maps.googleapis.com/maps/api/geocode/json'

@@ -29,7 +29,7 @@ While it's unnecessary for calling google maps api.}
 a data.frame with variables address or detail address components
 }
 \description{
-reverse geocodes a lat/lng location using Google or Baidu Maps.  Note that in
+reverse geocodes a lat/lng location using Google or Baidu Maps API.  Note that in
 most cases by using this function you are agreeing to the Google Maps API Terms
 of Service at \url{https://developers.google.com/maps/terms} or the Baidu Maps
 API Terms of Use at \url{http://developer.baidu.com/map/law.htm}.
@@ -62,7 +62,7 @@ Jun Cai (\email{cai-j12@mails.tsinghua.edu.cn}), PhD student from
 Center for Earth System Science, Tsinghua University
 }
 \seealso{
-\code{\link{geocode}}.
+\code{\link{geocode}}, \code{\link{geohost}}.
 
 Google Maps API at \url{http://code.google.com/apis/maps/documentation/geocoding/}
 and Baidu Maps API at \url{http://developer.baidu.com/map/webservice-geocoding.htm}
