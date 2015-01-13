@@ -14,7 +14,7 @@
 #' @param key an api key must be provided when calling baidu maps api. 
 #' While it's unnecessary for calling google maps api.
 #' @param output formatted address or formmatted address with address components
-#' @param messaging turn messaging on/off
+#' @param messaging turn messaging on/off. The default value is FALSE.
 #' @return a data.frame with variables address or detail address components 
 #' @author Jun Cai (\email{cai-j12@@mails.tsinghua.edu.cn}), PhD student from 
 #' Center for Earth System Science, Tsinghua University
@@ -55,11 +55,25 @@ revgeocode <- function(latlng, ics = c('WGS-84', 'GCJ-02', 'BD-09'),
   output <- match.arg(output)
   stopifnot(is.logical(messaging))
   
+  # vectorize for many locations
   if(is.data.frame(latlng)){
     return(ldply(seq_along(latlng), function(i){ revgeocode(as.numeric(latlng[i, ]), 
                                                             ics = ics, api = api, 
                                                             key = key, output = output, 
                                                             messaging = messaging) }))
+  }
+  
+  # different google maps api is used based user's location. If user is inside China,
+  # ditu.google.cn is used; otherwise maps.google.com is used.
+  cname <- fromJSON(readLines("http://api.hostip.info/get_json.php", warn = FALSE))['country_name']
+  if(api == 'google'){
+    if(cname != 'CHINA'){
+      api_url <- 'http://maps.googleapis.com/maps/api/geocode/json'
+    } else{
+      api_url <- 'http://ditu.google.cn/maps/api/geocode/json'
+    }
+  } else{
+    api_url <- 'http://api.map.baidu.com/geocoder/v2/'
   }
   
   # format url
@@ -74,9 +88,11 @@ revgeocode <- function(latlng, ics = c('WGS-84', 'GCJ-02', 'BD-09'),
     }
     
     # http://maps.googleapis.com/maps/api/geocode/json?latlng=LAT,LNG
-    # &sensor=FALSE&key=API_KEY
-    url_string <- paste('http://maps.googleapis.com/maps/api/geocode/json?latlng=', 
-                        latlng[1], ',', latlng[2], '&sensor=false', sep = '')
+    # &sensor=FALSE&key=API_KEY for outside China
+    # http://ditu.google.com/maps/api/geocode/json?latlng=LAT,LNG
+    # &sensor=FALSE&key=API_KEY for inside China
+    url_string <- paste(api_url, '?latlng=', latlng[1], ',', latlng[2], 
+                        '&sensor=false', sep = '')
     if(nchar(key) > 0){
       url_string <- paste(url_string, '&key=', key, sep = '')
     }
@@ -88,9 +104,8 @@ revgeocode <- function(latlng, ics = c('WGS-84', 'GCJ-02', 'BD-09'),
     coordtype <- code[ics]
     # http://api.map.baidu.com/geocoder/v2/?location=LAT,LNG&coordtype=COORDTYPE
     # &output=json&ak=API_KEY
-    url_string <- paste('http://api.map.baidu.com/geocoder/v2/?location=', 
-                        latlng[1], ',', latlng[2], '&coordtype=', coordtype, 
-                        '&output=json&ak=', key, sep = '')
+    url_string <- paste(api_url, '?location=', latlng[1], ',', latlng[2], 
+                        '&coordtype=', coordtype, '&output=json&ak=', key, sep = '')
   }
   
   url_string <- URLencode(url_string)
@@ -114,7 +129,7 @@ revgeocode <- function(latlng, ics = c('WGS-84', 'GCJ-02', 'BD-09'),
     # more than one address found?
     if(length(rgc$results) > 1 && messaging){
       message(paste('more than one address found for "', latlng[1], ', ', 
-                    latlng[2],  '", reverse geocoding first ...', sep = ''), apppendLF = T)
+                    latlng[2],  '", reverse geocoding first ... ', sep = ''), apppendLF = T)
     }
     
     rgcdf <- with(rgc$results[[1]], {data.frame(address = formatted_address, 

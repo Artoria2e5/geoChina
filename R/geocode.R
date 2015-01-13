@@ -15,7 +15,7 @@
 #' For address out of China, ocs is automatically set to 'WGS-84' and other values 
 #' are igored.
 #' @param output lat/lng coordinates or lat/lng coordinates with confidence
-#' @param messaging turn messaging on/off
+#' @param messaging turn messaging on/off. The default value is FALSE.
 #' @return a data.frame with variables lat/lng or lat/lng/conf 
 #' @author Jun Cai (\email{cai-j12@@mails.tsinghua.edu.cn}), PhD student from 
 #' Center for Earth System Science, Tsinghua University
@@ -76,24 +76,35 @@ geocode <- function(address, api = c('google', 'baidu'), key = '',
   
   # location encoding
   address <- enc2utf8(address)
-  
-  # format url
+  # different google maps api is used based user's location. If user is inside China,
+  # ditu.google.cn is used; otherwise maps.google.com is used.
+  cname <- fromJSON(readLines("http://api.hostip.info/get_json.php", warn = FALSE))['country_name']
   if(api == 'google'){
-    # https is only supported on Windows, when R is started with the --internet2 
-    # command line option. without this option, or on Mac, you will get the error 
-    # "unsupported URL scheme".
+    if(cname != 'CHINA'){
+      api_url <- 'http://maps.googleapis.com/maps/api/geocode/json'
+    } else{
+      api_url <- 'http://ditu.google.cn/maps/api/geocode/json'
+    }
+  } else{
+    api_url <- 'http://api.map.baidu.com/geocoder/v2/'
+  }
+  # format url
+  # https is only supported on Windows, when R is started with the --internet2 
+  # command line option. without this option, or on Mac, you will get the error 
+  # "unsupported URL scheme".
+  if(api == 'google'){
     # http://maps.googleapis.com/maps/api/geocode/json?address=ADDRESS&sensor
-    # =false&key=API_KEY
-    url_string <- paste('http://maps.googleapis.com/maps/api/geocode/json?address=', 
-                        address, '&sensor=false', sep = '')
+    # =false&key=API_KEY for outside China
+    # http://ditu.google.cn/maps/api/geocode/json?address=ADDRESS&sensor
+    # =false&key=API_KEY for outside China
+    url_string <- paste(api_url, '?address=', address, '&sensor=false', sep = '')
     if(nchar(key) > 0){
       url_string <- paste(url_string, '&key=', key, sep = '')
     }
   }
   if(api == 'baidu'){
     # http://api.map.baidu.com/geocoder/v2/?address=ADDRESS&output=json&ak=API_KEY
-    url_string <- paste('http://api.map.baidu.com/geocoder/v2/?address=', address, 
-                        '&output=json&ak=', key, sep = '')
+    url_string <- paste(api_url, '?address=', address, '&output=json&ak=', key, sep = '')
   }
   
   url_string <- URLencode(url_string)
@@ -134,6 +145,7 @@ geocode <- function(address, api = c('google', 'baidu'), key = '',
     } else{
       if(ocs != 'WGS-84'){
         message('wrong usage: for address out of China, ocs can only be set to "WGS-84"', appendLF = T)
+        ocs <- 'WGS-84'
       }
     }
     
