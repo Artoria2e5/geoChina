@@ -80,10 +80,10 @@ geocode <- function(address, api = c('google', 'baidu'), key = '',
   # ditu.google.cn is used; otherwise maps.google.com is used.
   cname <- geohost()['country_name']
   if(api == 'google'){
-    if(cname != 'CHINA'){
-      api_url <- 'http://maps.googleapis.com/maps/api/geocode/json'
-    } else{
+    if(cname %in% c('CHINA', '(Unknown Country?)')){
       api_url <- 'http://ditu.google.cn/maps/api/geocode/json'
+    } else{
+      api_url <- 'http://maps.googleapis.com/maps/api/geocode/json'
     }
   } else{
     api_url <- 'http://api.map.baidu.com/geocoder/v2/'

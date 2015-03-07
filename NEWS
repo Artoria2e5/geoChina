@@ -1,3 +1,11 @@
+Version 1.2.1
+-------------------------------------------------------------------------
+FIXS
+
+* geocode and revgeocode failed to call google api when user's location can't be geolocated by IP
+
+
+
 Version 1.2
 -------------------------------------------------------------------------
 NEW FEATURES
