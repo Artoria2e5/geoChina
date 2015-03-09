@@ -18,3 +18,8 @@ Install the development version from GitHub (`devtools` package is required):
 ```r
 devtools::install_github("caijun/geoChina")
 ```
+
+## Contact
+
+Bugs and feature requests can be filed to
+<https://github.com/caijun/geoChina/issues>. Pull requests are also welcome.
