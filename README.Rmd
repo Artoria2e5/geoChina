@@ -14,7 +14,7 @@ library(geoChina)
 
 # geoChina
 
-[![Build Status](https://travis-ci.org/caijun/geoChina.png?branch=master)](https://travis-ci.org/caijun/geoChina)[![Issue Stats](http://issuestats.com/github/caijun/geoChina/badge/issue?style=flat)](http://issuestats.com/github/caijun/geoChina)
+[![Build Status](https://travis-ci.org/caijun/geoChina.png?branch=master)](https://travis-ci.org/caijun/geoChina) [![Issue Stats](http://issuestats.com/github/caijun/geoChina/badge/issue?style=flat)](http://issuestats.com/github/caijun/geoChina)
 
 A R package for geocoding address by calling the Google or Baidu Geocoding API and coordinate conversions for WGS-84, GCJ-02 and BD-09 geodetic system
 
