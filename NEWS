@@ -1,3 +1,12 @@
+Version 1.2.2
+-------------------------------------------------------------------------
+FIXS
+
+* geocode and revgeocode failed to call google api when user's location can't be geolocated by IP on Windows
+
+
+
+
 Version 1.2.1
 -------------------------------------------------------------------------
 FIXS
