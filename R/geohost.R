@@ -1,49 +1,62 @@
 #' IP address lookup
 #'
-#' geocodes an IP address using HostIP.info API \url{http://www.hostip.info}.
+#' geocodes an IP address using either freegeoip.net \url{http://freegeoip.net} or 
+#' ipinfo.io \url{http://ipinfo.io/developers} IP lookup API.
 #' 
 #' @param ip a character vector specifying an IP (e.g., "12.215.42.19"). 
 #' The default value is no IP is specified and the host IP is used.
-#' @param position whether or not output lat/lng infomation. The default value is TRUE.
-#' @return a vector with information of contry_name, country_code, city, and ip. 
-#' If numerous IPs are inputted, a data.frame is returned. 
+#' @param api use freegeoip.net or ipinfo.io IP lookup API. By default 
+#' freegeoip.net is used.
+#' @return a vector with information of ip, country_code, country_name, region_code, 
+#' city, zip_code, time_zone, latitude, longitude and metro_code for freegeoip.net API, 
+#' of ip, hostname, city, region, country, loc, org, postal and phone for ipinfo.io 
+#' IP lookup API. If numerous IPs are inputted, a data.frame is returned. 
 #' @author Jun Cai (\email{cai-j12@@mails.tsinghua.edu.cn}), PhD student from 
 #' Center for Earth System Science, Tsinghua University
+#' @details note that freegeoip.net API is allowed up to 10,000 queries per hour 
+#' by default, ipinfo API is limited to 1,000 requests per day.
 #' @seealso \code{\link{geocode}}, \code{\link{revgeocode}}.
 #' 
-#' HostIP.info IP Address Lookup API at \url{http://www.hostip.info/use.html}
+#' freegeoip.net IP lookup API at \url{http://freegeoip.net}
+#' 
+#' ipinfo.io IP lookup API at \url{http://ipinfo.io/developers}
 #' @export
 #' @examples
 #' \dontrun{
 #' # geocode host IP
 #' geohost()
-#' # no lat/lng infomation
-#' geohost(position = F)
+#' geohost(api = "ipinfo.io")
 #' # specify an IP for geocoding
 #' geohost(ip = "12.215.42.19")
-#' geohost(ip = "12.215.42.19", position = F)
+#' geohost(ip = "12.215.42.19", api = "ipinfo.io")
 #' # geocode multiple IPs
 #' geohost(ip = c("61.135.169.81", "12.215.42.19"))
-#' geohost(ip = c("61.135.169.81", "12.215.42.19"), position = F)
+#' geohost(ip = c("61.135.169.81", "12.215.42.19"), api = "ipinfo.io")
 #' }
 
-geohost <- function(ip = '', position = TRUE) {
+geohost <- function(ip = '', api = c("freegeoip.net", "ipinfo.io")) {
   # check parameters
   stopifnot(is.character(ip))
-  stopifnot(is.logical(position))
+  api <- match.arg(api)
   
   # vectorize for many IPs
   if (length(ip) > 1) {
-    return(ldply(ip, geohost, position = position))
+    return(ldply(ip, geohost, api = api))
   }
   
-  url_string <- "http://api.hostip.info/get_json.php"
-  if (nchar(ip) > 0) {
-    url_string <- paste(url_string, "?ip=", ip, sep = "")
+  if (api == "freegeoip.net") {
+    url_string <- "http://freegeoip.net/json/"
+    if (nchar(ip) > 0) {
+      url_string <- paste0(url_string, ip)
+    }
+    x <- readLines(url_string, warn = F)
+    as.data.frame(fromJSON(x))
+  } else {
+    url_string <- "http://ipinfo.io/json"
+    if (nchar(ip) > 0) {
+      url_string <- paste0("http://ipinfo.io/", ip, "/json")
+    }
+    x <- paste(readLines(url_string, warn = F), collapse = "")
+    as.data.frame(as.list(fromJSON(x)))
   }
-  if (position) {
-    hyphen <- ifelse(nchar(ip) == 0, "?", "&")
-    url_string <- paste(url_string, hyphen, "position=", position, sep = "")
-  }
-  fromJSON(readLines(url_string, warn = F))
 }

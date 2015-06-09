@@ -4,33 +4,40 @@
 \alias{geohost}
 \title{IP address lookup}
 \usage{
-geohost(ip = "", position = TRUE)
+geohost(ip = "", api = c("freegeoip.net", "ipinfo.io"))
 }
 \arguments{
 \item{ip}{a character vector specifying an IP (e.g., "12.215.42.19").
 The default value is no IP is specified and the host IP is used.}
 
-\item{position}{whether or not output lat/lng infomation. The default value is TRUE.}
+\item{api}{use freegeoip.net or ipinfo.io IP lookup API. By default
+freegeoip.net is used.}
 }
 \value{
-a vector with information of contry_name, country_code, city, and ip.
-If numerous IPs are inputted, a data.frame is returned.
+a vector with information of ip, country_code, country_name, region_code,
+city, zip_code, time_zone, latitude, longitude and metro_code for freegeoip.net API,
+of ip, hostname, city, region, country, loc, org, postal and phone for ipinfo.io
+IP lookup API. If numerous IPs are inputted, a data.frame is returned.
 }
 \description{
-geocodes an IP address using HostIP.info API \url{http://www.hostip.info}.
+geocodes an IP address using either freegeoip.net \url{http://freegeoip.net} or
+ipinfo.io \url{http://ipinfo.io/developers} IP lookup API.
+}
+\details{
+note that freegeoip.net API is allowed up to 10,000 queries per hour
+by default, ipinfo API is limited to 1,000 requests per day.
 }
 \examples{
 \dontrun{
 # geocode host IP
 geohost()
-# no lat/lng infomation
-geohost(position = F)
+geohost(api = "ipinfo.io")
 # specify an IP for geocoding
 geohost(ip = "12.215.42.19")
-geohost(ip = "12.215.42.19", position = F)
+geohost(ip = "12.215.42.19", api = "ipinfo.io")
 # geocode multiple IPs
 geohost(ip = c("61.135.169.81", "12.215.42.19"))
-geohost(ip = c("61.135.169.81", "12.215.42.19"), position = F)
+geohost(ip = c("61.135.169.81", "12.215.42.19"), api = "ipinfo.io")
 }
 }
 \author{
@@ -40,6 +47,8 @@ Center for Earth System Science, Tsinghua University
 \seealso{
 \code{\link{geocode}}, \code{\link{revgeocode}}.
 
-HostIP.info IP Address Lookup API at \url{http://www.hostip.info/use.html}
+freegeoip.net IP lookup API at \url{http://freegeoip.net}
+
+ipinfo.io IP lookup API at \url{http://ipinfo.io/developers}
 }
 

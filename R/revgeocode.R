@@ -65,9 +65,9 @@ revgeocode <- function(latlng, ics = c('WGS-84', 'GCJ-02', 'BD-09'),
   
   # different google maps api is used based user's location. If user is inside China,
   # ditu.google.cn is used; otherwise maps.google.com is used.
-  cname <- geohost['country_name']
   if(api == 'google'){
-    if(cname %in% c('CHINA', '(Unknown Country?)')){
+    cname <- ip.country()
+    if(cname == "CN"){
       api_url <- 'http://ditu.google.cn/maps/api/geocode/json'
     } else{
       api_url <- 'http://maps.googleapis.com/maps/api/geocode/json'

@@ -78,9 +78,9 @@ geocode <- function(address, api = c('google', 'baidu'), key = '',
   address <- enc2utf8(address)
   # different google maps api is used based user's location. If user is inside China,
   # ditu.google.cn is used; otherwise maps.google.com is used.
-  cname <- geohost()['country_name']
   if(api == 'google'){
-    if(cname %in% c('CHINA', '(Unknown Country?)')){
+    cname <- ip.country()
+    if(cname == "CN"){
       api_url <- 'http://ditu.google.cn/maps/api/geocode/json'
     } else{
       api_url <- 'http://maps.googleapis.com/maps/api/geocode/json'
@@ -179,4 +179,13 @@ NULLtoNA <- function(x){
   if(is.null(x)) return(NA)
   if(is.character(x) & nchar(x) == 0) return(NA)
   x
+}
+
+# option ip.country to store IP country and avoid calling geohost() repeatedly 
+# when geocoding muptiple addresses
+ip.country <- function(){
+  if(!"ip.country" %in% names(options())) {
+    options(ip.country = geohost(api = "ipinfo.io")["country"])
+  }
+  getOption("ip.country")
 }
