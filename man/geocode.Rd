@@ -5,7 +5,8 @@
 \title{Geocode}
 \usage{
 geocode(address, api = c("google", "baidu"), key = "", ocs = c("WGS-84",
-  "GCJ-02", "BD-09"), output = c("latlng", "latlngc"), messaging = FALSE)
+  "GCJ-02", "BD-09"), output = c("latlng", "latlngc"), messaging = FALSE,
+  time = 0)
 }
 \arguments{
 \item{address}{a character vector specifying a location of interest (e.g.,
@@ -24,6 +25,11 @@ are igored.}
 \item{output}{lat/lng coordinates or lat/lng coordinates with confidence}
 
 \item{messaging}{turn messaging on/off. The default value is FALSE.}
+
+\item{time}{the time interval to geocode, in seconds. Default value is zero.
+When you geocode multiple addresses, set a proper time interval to avoid
+exceeding usage limits. For details see
+\url{https://developers.google.com/maps/documentation/business/articles/usage_limits}}
 }
 \value{
 a data.frame with variables lat/lng or lat/lng/conf
@@ -48,6 +54,8 @@ geocode(c('Tsinghua University', 'Beijing railway station'), api = 'google',
         ocs = 'GCJ-02')
 geocode(c('Tsinghua University', 'Beijing railway station'), api = 'google',
         ocs = 'WGS-84', output = 'latlngc', messaging = TRUE)
+geocode(c('Tsinghua University', 'Beijing railway station'), api = 'google',
+        ocs = 'WGS-84', output = 'latlngc', messaging = TRUE, time = 2)
 geocode('Beijing railway station', api = 'baidu', key = 'your baidu maps api key',
         ocs = 'BD-09')
 geocode('Beijing railway station', api = 'baidu', key = 'your baidu maps api key',

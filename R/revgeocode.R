@@ -15,6 +15,10 @@
 #' While it's unnecessary for calling google maps api.
 #' @param output formatted address or formmatted address with address components
 #' @param messaging turn messaging on/off. The default value is FALSE.
+#' @param time the time interval to revgeocode, in seconds. Default value is zero. 
+#' When you revgeocode multiple locations, set a proper time interval to avoid 
+#' exceeding usage limits. For details see 
+#' \url{https://developers.google.com/maps/documentation/business/articles/usage_limits}
 #' @return a data.frame with variables address or detail address components 
 #' @author Jun Cai (\email{cai-j12@@mails.tsinghua.edu.cn}), PhD student from 
 #' Center for Earth System Science, Tsinghua University
@@ -42,11 +46,13 @@
 #' # reverse geocode multiple locations
 #' latlng = data.frame(lat = c(39.99837, 39.98565), lng = c(116.3203, 116.2998))
 #' revgeocode(latlng, ics = 'WGS-84', api = 'google', output = 'address')
+#' revgeocode(latlng, ics = 'WGS-84', api = 'google', output = 'address', time = 2)
 #' }
 
 revgeocode <- function(latlng, ics = c('WGS-84', 'GCJ-02', 'BD-09'), 
                        api = c('google', 'baidu'), key = '', 
-                       output = c('address', 'addressc'), messaging = FALSE){
+                       output = c('address', 'addressc'), messaging = FALSE, 
+                       time = 0){
   # check parameters
   stopifnot(class(latlng) %in% c('numeric', 'data.frame'))
   ics <- match.arg(ics)
@@ -54,13 +60,14 @@ revgeocode <- function(latlng, ics = c('WGS-84', 'GCJ-02', 'BD-09'),
   stopifnot(is.character(key))
   output <- match.arg(output)
   stopifnot(is.logical(messaging))
+  stopifnot(is.numeric(time))
   
   # vectorize for many locations
   if(is.data.frame(latlng)){
-    return(ldply(seq_along(latlng), function(i){ revgeocode(as.numeric(latlng[i, ]), 
-                                                            ics = ics, api = api, 
-                                                            key = key, output = output, 
-                                                            messaging = messaging) }))
+    return(ldply(seq_along(latlng), function(i){ 
+      Sys.sleep(time)
+      revgeocode(as.numeric(latlng[i, ]), ics = ics, api = api, key = key, 
+                 output = output, messaging = messaging) }))
   }
   
   # different google maps api is used based user's location. If user is inside China,

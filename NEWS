@@ -1,9 +1,17 @@
+Version 1.2.4
+-------------------------------------------------------------------------
+NEW FEATURES
+
+* add time parameter to specify time interval for (rev)geocode to avoid exceeding usage limits of Google Maps API
+
+
+
 Version 1.2.3
 -------------------------------------------------------------------------
 NEW FEATURES
 
 * geohost uses freegeoip.net or ipinfo.io rather than hostip.info IP lookup API
-* store IP country to avoid calling geohost repeatedly when (rev)geocoding muptiple addresses
+* store IP country to avoid calling geohost repeatedly when (rev)geocoding muptiple addresses or locations
 
 
 

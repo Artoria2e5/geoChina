@@ -16,6 +16,10 @@
 #' are igored.
 #' @param output lat/lng coordinates or lat/lng coordinates with confidence
 #' @param messaging turn messaging on/off. The default value is FALSE.
+#' @param time the time interval to geocode, in seconds. Default value is zero. 
+#' When you geocode multiple addresses, set a proper time interval to avoid 
+#' exceeding usage limits. For details see 
+#' \url{https://developers.google.com/maps/documentation/business/articles/usage_limits}
 #' @return a data.frame with variables lat/lng or lat/lng/conf 
 #' @author Jun Cai (\email{cai-j12@@mails.tsinghua.edu.cn}), PhD student from 
 #' Center for Earth System Science, Tsinghua University
@@ -37,6 +41,8 @@
 #'         ocs = 'GCJ-02')
 #' geocode(c('Tsinghua University', 'Beijing railway station'), api = 'google', 
 #'         ocs = 'WGS-84', output = 'latlngc', messaging = TRUE)
+#' geocode(c('Tsinghua University', 'Beijing railway station'), api = 'google', 
+#'         ocs = 'WGS-84', output = 'latlngc', messaging = TRUE, time = 2)
 #' geocode('Beijing railway station', api = 'baidu', key = 'your baidu maps api key', 
 #'         ocs = 'BD-09')
 #' geocode('Beijing railway station', api = 'baidu', key = 'your baidu maps api key', 
@@ -51,7 +57,8 @@
 
 geocode <- function(address, api = c('google', 'baidu'), key = '', 
                     ocs = c('WGS-84', 'GCJ-02', 'BD-09'), 
-                    output = c('latlng', 'latlngc'), messaging = FALSE){  
+                    output = c('latlng', 'latlngc'), messaging = FALSE, 
+                    time = 0){  
   # check parameters
   stopifnot(is.character(address))
   api <- match.arg(api)
@@ -59,6 +66,7 @@ geocode <- function(address, api = c('google', 'baidu'), key = '',
   output <- match.arg(output)
   ocs <- match.arg(ocs)
   stopifnot(is.logical(messaging))
+  stopifnot(is.numeric(time))
   
   # vectorize for many addresses
   if(length(address) > 1){
@@ -69,8 +77,10 @@ geocode <- function(address, api = c('google', 'baidu'), key = '',
     }
           
     if(output == 'latlng' | output == 'latlngc'){
-      return(ldply(address, geocode, api = api, key = key, ocs = ocs, 
-                   output = output, messaging = messaging))
+      return(ldply(address, function(add){
+        Sys.sleep(time)
+        geocode(add, api = api, key = key, ocs = ocs, output = output, messaging = messaging)
+      }))
     }
   }
   
@@ -182,7 +192,7 @@ NULLtoNA <- function(x){
 }
 
 # option ip.country to store IP country and avoid calling geohost() repeatedly 
-# when geocoding muptiple addresses
+# when geocoding multiple addresses or revgeocoding multiple locations
 ip.country <- function(){
   if(!"ip.country" %in% names(options())) {
     options(ip.country = geohost(api = "ipinfo.io")["country"])

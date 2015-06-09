@@ -6,7 +6,7 @@
 \usage{
 revgeocode(latlng, ics = c("WGS-84", "GCJ-02", "BD-09"), api = c("google",
   "baidu"), key = "", output = c("address", "addressc"),
-  messaging = FALSE)
+  messaging = FALSE, time = 0)
 }
 \arguments{
 \item{latlng}{a location in latitude/longitude format}
@@ -24,6 +24,11 @@ While it's unnecessary for calling google maps api.}
 \item{output}{formatted address or formmatted address with address components}
 
 \item{messaging}{turn messaging on/off. The default value is FALSE.}
+
+\item{time}{the time interval to revgeocode, in seconds. Default value is zero.
+When you revgeocode multiple locations, set a proper time interval to avoid
+exceeding usage limits. For details see
+\url{https://developers.google.com/maps/documentation/business/articles/usage_limits}}
 }
 \value{
 a data.frame with variables address or detail address components
@@ -55,6 +60,7 @@ revgeocode(c(39.90105, 116.42079), ics = 'WGS-84', api = 'baidu',
 # reverse geocode multiple locations
 latlng = data.frame(lat = c(39.99837, 39.98565), lng = c(116.3203, 116.2998))
 revgeocode(latlng, ics = 'WGS-84', api = 'google', output = 'address')
+revgeocode(latlng, ics = 'WGS-84', api = 'google', output = 'address', time = 2)
 }
 }
 \author{
