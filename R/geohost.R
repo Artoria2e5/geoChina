@@ -49,14 +49,18 @@ geohost <- function(ip = '', api = c("freegeoip.net", "ipinfo.io")) {
     if (nchar(ip) > 0) {
       url_string <- paste0(url_string, ip)
     }
-    x <- readLines(url_string, warn = F)
+    con <- curl(url_string)
+    x <- readLines(con, warn = F)
+    close(con)
     as.data.frame(fromJSON(x))
   } else {
     url_string <- "http://ipinfo.io/json"
     if (nchar(ip) > 0) {
       url_string <- paste0("http://ipinfo.io/", ip, "/json")
     }
-    x <- paste(readLines(url_string, warn = F), collapse = "")
+    con <- curl(url_string)
+    x <- paste(readLines(con, warn = F), collapse = "")
+    close(con)
     as.data.frame(as.list(fromJSON(x)))
   }
 }

@@ -21,7 +21,7 @@
 #' @seealso \code{\link{wgs2gcj}}, \code{\link{wgs2bd}}, \code{\link{gcj2wgs}}, 
 #' \code{\link{gcj2bd}}, \code{\link{bd2wgs}}, \code{\link{bd2gcj}}.
 #' @export
-#' @import RCurl RJSONIO
+#' @import curl RJSONIO
 #' @examples
 #' \dontrun{
 #' # latitude/longitude coordinates of Beijing railway station
@@ -82,10 +82,10 @@ conv <- function(lat, lon, from = c('WGS-84', 'GCJ-02', 'BD-09'),
       message(paste('calling ', url_string, ' ... ', sep = ''), appendLF = F)
       
       # convert
-      connect <- url(url_string)
-      cv <- fromJSON(paste(readLines(connect, warn = FALSE), collapse = ''), drop = FALSE)
+      con <- curl(url_string)
+      cv <- fromJSON(paste(readLines(con, warn = FALSE), collapse = ''), drop = FALSE)
       message('done.')  
-      close(connect)
+      close(con)
       
       # did convert fail?
       if(is.list(cv)){

@@ -115,14 +115,13 @@ revgeocode <- function(latlng, ics = c('WGS-84', 'GCJ-02', 'BD-09'),
                         '&coordtype=', coordtype, '&output=json&ak=', key, sep = '')
   }
   
-  url_string <- URLencode(url_string)
   if(messaging) message(paste('calling ', url_string, ' ... ', sep = ''), appendLF = F)
   
   # reverse gecode
-  connect <- url(url_string)
-  rgc <- fromJSON(paste(readLines(connect, warn = FALSE), collapse = ''))
+  con <- curl(url_string)
+  rgc <- fromJSON(paste(readLines(con, warn = FALSE), collapse = ''))
   if(messaging) message('done.')  
-  close(connect)
+  close(con)
   
   # reverse geocoding results
   if(api == 'google'){

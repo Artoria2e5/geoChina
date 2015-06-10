@@ -1,3 +1,12 @@
+Version 1.2.5
+-------------------------------------------------------------------------
+NEW FEATURES
+
+* use curl supported by libcurl other than url to open URLs
+* remove URLencode to show URLs human friendly
+
+
+
 Version 1.2.4
 -------------------------------------------------------------------------
 NEW FEATURES
