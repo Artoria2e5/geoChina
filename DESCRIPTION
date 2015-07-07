@@ -21,4 +21,5 @@ Imports:
     RJSONIO,
     curl,
     plyr
-Roxygen: list(wrap = FALSE)
+Suggests:
+    testthat
