@@ -118,7 +118,7 @@ revgeocode <- function(latlng, ics = c('WGS-84', 'GCJ-02', 'BD-09'),
   if(messaging) message(paste('calling ', url_string, ' ... ', sep = ''), appendLF = F)
   
   # reverse gecode
-  con <- curl(url_string)
+  con <- curl(URLencode(url_string))
   rgc <- fromJSON(paste(readLines(con, warn = FALSE), collapse = ''))
   if(messaging) message('done.')  
   close(con)

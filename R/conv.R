@@ -78,11 +78,10 @@ conv <- function(lat, lon, from = c('WGS-84', 'GCJ-02', 'BD-09'),
       # http://api.map.baidu.com/ag/coord/convert?x=lon&y=lat&from=FROM&to=TO
       url_string <- paste('http://api.map.baidu.com/ag/coord/convert?x=', lon, 
                           '&y=', lat, '&from=', f, '&to=', t, sep = '')
-      url_string <- URLencode(url_string)
       message(paste('calling ', url_string, ' ... ', sep = ''), appendLF = F)
       
       # convert
-      con <- curl(url_string)
+      con <- curl(URLencode(url_string))
       cv <- fromJSON(paste(readLines(con, warn = FALSE), collapse = ''), drop = FALSE)
       message('done.')  
       close(con)

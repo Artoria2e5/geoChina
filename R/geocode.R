@@ -119,8 +119,8 @@ geocode <- function(address, api = c('google', 'baidu'), key = '',
   
   if(messaging) message(paste('calling ', url_string, ' ... ', sep = ''), appendLF = F)
   
-  # gecode
-  con <- curl(url_string)
+  # geocode
+  con <- curl(URLencode(url_string))
   gc <- fromJSON(paste(readLines(con, warn = FALSE), collapse = ''))
   if(messaging) message('done.')  
   close(con)

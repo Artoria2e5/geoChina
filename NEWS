@@ -1,3 +1,15 @@
+Version 1.2.6
+-------------------------------------------------------------------------
+NEW FEATURES
+
+* add some tests
+
+FIXS
+
+* when geocoding address with space, gencode returns HTTP error 400, which is fixed by encode URL string
+
+
+
 Version 1.2.5
 -------------------------------------------------------------------------
 NEW FEATURES

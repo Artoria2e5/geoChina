@@ -58,7 +58,7 @@ geohost <- function(ip = '', api = c("freegeoip.net", "ipinfo.io")) {
     if (nchar(ip) > 0) {
       url_string <- paste0("http://ipinfo.io/", ip, "/json")
     }
-    con <- curl(url_string)
+    con <- curl(URLencode(url_string))
     x <- paste(readLines(con, warn = F), collapse = "")
     close(con)
     as.data.frame(as.list(fromJSON(x)))
