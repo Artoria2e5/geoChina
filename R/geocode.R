@@ -30,6 +30,7 @@
 #' and Baidu Maps API at \url{http://developer.baidu.com/map/webservice-geocoding.htm}
 #' @export
 #' @import plyr
+#' @importFrom utils URLencode
 #' @examples
 #' \dontrun{
 #' geocode('Tsinghua University', api = 'google', ocs = 'GCJ-02')

@@ -1,6 +1,3 @@
-
-
-
 # geoChina
 
 [![Build Status](https://travis-ci.org/caijun/geoChina.png?branch=master)](https://travis-ci.org/caijun/geoChina) [![Issue Stats](http://issuestats.com/github/caijun/geoChina/badge/issue?style=flat)](http://issuestats.com/github/caijun/geoChina)

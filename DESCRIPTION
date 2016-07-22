@@ -1,10 +1,11 @@
 Package: geoChina
 Type: Package
-Title: A package for geocoding, reverse geocoding and coordinate
-    transformations between WGS-84, GCJ-02 and BD-09 coordinate systems
-Version: 1.2.7
-Date: 2016-03-11
-Author: Jun Cai <cai-j12@mails.tsinghua.edu.cn>
+Title: An R Package for Geocoding, Reverse Geocoding and Coordinate Transformations Between WGS-84, GCJ-02 and BD-09 Coordinate Systems
+Version: 1.2.8
+Date: 2016-07-22
+Authors@R: c(
+    person("Jun", "Cai", email = "cai-j12@mails.tsinghua.edu.cn", role = c("aut", "cre"))
+    )
 Maintainer: Jun Cai <cai-j12@mails.tsinghua.edu.cn>
 Description: In China the digital maps use two main Geographic Coordinate
     Systems (GCSs), namely GCJ-02 and BD-09, rather than the well known WGS-84
@@ -15,6 +16,9 @@ Description: In China the digital maps use two main Geographic Coordinate
     the coordinates in the GCS different from the one that Google or Baidu map
     uses. Besides, function for geocoding IP address is provided.
 License: GPL-3
+URL: https://github.com/caijun/geoChina
+BugReports: https://github.com/caijun/geoChina/issues
+Encoding: UTF-8
 Depends:
     R (>= 2.11.0)
 Imports:
