@@ -1,3 +1,10 @@
+# CHANGES IN geoChina VERSION 1.2.9
+
+## DOCUMENTATION CHANGES
+
+- updated DECRIPRION and README.md file.
+
+
 # CHANGES IN geoChina VERSION 1.2.8
 
 ## NEW FEATURES
