@@ -1,9 +1,12 @@
 # CHANGES IN geoChina VERSION 1.3.0
 
-## DOCUMENTATION CHANGES
+## NEW FEATURES
 
 - invoked Google Maps Geocoding API by https instead of http when (rev)geocoding outside China.
-- updated examples and test cases of `geocode()`, `revgeocode()`, and documents.
+
+## DOCUMENTATION CHANGES
+
+- updated examples of `geocode()`, `revgeocode()`, test cases, and documents.
 
 
 # CHANGES IN geoChina VERSION 1.2.9
