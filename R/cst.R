@@ -23,8 +23,7 @@ ee <- (a^2 - b^2) / a^2
 #' @details All real WGS-84 latitude/longitude coordites must be encrypted by 
 #' National Admistration of Surveying, Mapping and Geoinformation 
 #' (\url{http://en.sbsm.gov.cn/}) into GCJ-02 (known as 'Mars coordinate system') 
-#' with a deviation no more than 700 meters in China. Though the encryption algorithm 
-#' is highly confidential, the conversion algorithm is 
+#' with a deviation no more than 700 meters in China. The decryption algorithm is 
 #' a public secrect on the Internet and verfied to be correct.
 #' @seealso \code{\link{gcj2wgs}}, \code{\link{conv}}.
 #' 
