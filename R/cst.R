@@ -18,13 +18,13 @@ ee <- (a^2 - b^2) / a^2
 #' @param wgsLat a numeric latitude in WGS-84
 #' @param wgsLon a numeric longitude in WGS-84
 #' @return a data.frame with variables lat/lng
-#' @author Jun Cai (\email{cai-j12@@mails.tsinghua.edu.cn}), PhD student from 
-#' Center for Earth System Science, Tsinghua University
-#' @details for the sake of information security, all real WGS-84 latitude/longitude 
-#' coordites must be encrypted by National Admistration of Surveying, Mapping 
-#' and Geoinformation (\url{http://en.sbsm.gov.cn/}) into GCJ-02 (known as 'Mars 
-#' coordinate system') with a deviation no more than 700 meters in China. Though 
-#' the encryption algorithm is highly confidential, the conversion algorithm is 
+#' @author Jun Cai (\email{cai-j12@@mails.tsinghua.edu.cn}), PhD candidate from 
+#' Department of Earth System Science, Tsinghua University
+#' @details All real WGS-84 latitude/longitude coordites must be encrypted by 
+#' National Admistration of Surveying, Mapping and Geoinformation 
+#' (\url{http://en.sbsm.gov.cn/}) into GCJ-02 (known as 'Mars coordinate system') 
+#' with a deviation no more than 700 meters in China. Though the encryption algorithm 
+#' is highly confidential, the conversion algorithm is 
 #' a public secrect on the Internet and verfied to be correct.
 #' @seealso \code{\link{gcj2wgs}}, \code{\link{conv}}.
 #' 
@@ -43,11 +43,11 @@ ee <- (a^2 - b^2) / a^2
 
 wgs2gcj <- function(wgsLat, wgsLon){
   # vectorize
-  if(length(wgsLat) > 1){
+  if (length(wgsLat) > 1) {
     return(ldply(seq_along(wgsLat), function(i){ wgs2gcj(wgsLat[i], wgsLon[i]) }))
   }
   
-  if(outofChina(wgsLat, wgsLon)){
+  if (outofChina(wgsLat, wgsLon)) {
     gcjLat <- wgsLat
     gcjLon <- wgsLat
     return(data.frame(lat = gcjLat, lng = gcjLon))
@@ -67,8 +67,8 @@ wgs2gcj <- function(wgsLat, wgsLon){
 }
 
 outofChina <- function(lat, lon){
-  if(lon < 72.004 | lon > 137.8347) return(TRUE)
-  if(lat < 0.8293 | lat > 55.8271) return(TRUE)
+  if (lon < 72.004 | lon > 137.8347) return(TRUE)
+  if (lat < 0.8293 | lat > 55.8271) return(TRUE)
   return(FALSE)
 }
 
@@ -97,8 +97,8 @@ transformLon <- function(x, y){
 #' @param gcjLat a numeric latitude in GCJ-02
 #' @param gcjLon a numeric longitude in GCJ-02
 #' @return a data.frame with variables lat/lng
-#' @author Jun Cai (\email{cai-j12@@mails.tsinghua.edu.cn}), PhD student from 
-#' Center for Earth System Science, Tsinghua University
+#' @author Jun Cai (\email{cai-j12@@mails.tsinghua.edu.cn}), PhD candidate from 
+#' Department of Earth System Science, Tsinghua University
 #' @details since the encryption function from WGS-84 to GCJ-02 doesn't have 
 #' inverse function, the inverse transformation can only be achieved by numeric 
 #' algorithm. Coordinates encryption algorithm must ensure the relative position 
@@ -130,7 +130,7 @@ transformLon <- function(x, y){
 # using V' to approximate V.
 gcj2wgs <- function(gcjLat, gcjLon){
   # vectorize
-  if(length(gcjLat) > 1){
+  if (length(gcjLat) > 1) {
     return(ldply(seq_along(gcjLat), function(i){ gcj2wgs(gcjLat[i], gcjLon[i]) }))
   }
   
@@ -138,7 +138,7 @@ gcj2wgs <- function(gcjLat, gcjLon){
   w0 <- g0
   g1 <- wgs2gcj(w0[1], w0[2])
   w1 <- w0 - (g1 - g0)
-  while(max(abs(w1 - w0)) >= 1e-6){
+  while (max(abs(w1 - w0)) >= 1e-6) {
     w0 <- w1
     g1 <- wgs2gcj(w0[1], w0[2])
     w1 <- w0 - (g1 - g0)
@@ -155,10 +155,10 @@ gcj2wgs <- function(gcjLat, gcjLon){
 #' @param gcjLat a numeric latitude in GCJ-02
 #' @param gcjLon a numeric longitude in GCJ-02
 #' @return a data.frame with variables lat/lng
-#' @author Jun Cai (\email{cai-j12@@mails.tsinghua.edu.cn}), PhD student from 
-#' Center for Earth System Science, Tsinghua University
-#' @details BD-09 coordinate system is used by Baidu Maps and encrypted based on 
-#' GCJ-02 coordinates for information safety.
+#' @author Jun Cai (\email{cai-j12@@mails.tsinghua.edu.cn}), PhD candidate from 
+#' Department of Earth System Science, Tsinghua University
+#' @details BD-09 coordinate system is used by Baidu Maps and further encrypted based on 
+#' GCJ-02 coordinates.
 #' @seealso \code{\link{bd2gcj}}, \code{\link{conv}}.
 #' 
 #' \url{http://blog.csdn.net/coolypf/article/details/8569813} for C version 
@@ -191,10 +191,10 @@ gcj2bd <- function(gcjLat, gcjLon){
 #' @param bdLat a numeric latitude in BD-09
 #' @param bdLon a numeric longitude in BD-09
 #' @return a data.frame with variables lat/lng
-#' @author Jun Cai (\email{cai-j12@@mails.tsinghua.edu.cn}), PhD student from 
-#' Center for Earth System Science, Tsinghua University
-#' @details BD-09 coordinate system is used by Baidu Maps and encrypted based on 
-#' GCJ-02 coordinates for information safety.
+#' @author Jun Cai (\email{cai-j12@@mails.tsinghua.edu.cn}), PhD candidate from 
+#' Department of Earth System Science, Tsinghua University
+#' @details BD-09 coordinate system is used by Baidu Maps and further encrypted based on 
+#' GCJ-02 coordinates.
 #' @seealso \code{\link{gcj2bd}}, \code{\link{conv}}.
 #' 
 #' \url{http://blog.csdn.net/coolypf/article/details/8569813} for C version 
@@ -245,8 +245,8 @@ bd2gcj <- function(bdLat, bdLon){
 #' @param wgsLat a numeric latitude in WGS-84
 #' @param wgsLon a numeric longitude in WGS-84
 #' @return a data.frame with variables lat/lng
-#' @author Jun Cai (\email{cai-j12@@mails.tsinghua.edu.cn}), PhD student from 
-#' Center for Earth System Science, Tsinghua University
+#' @author Jun Cai (\email{cai-j12@@mails.tsinghua.edu.cn}), PhD candidate from 
+#' Department of Earth System Science, Tsinghua University
 #' @details convert WGS-84 coordinates first into GCJ-02, then into BD-09.
 #' @seealso \code{\link{wgs2gcj}}, \code{\link{gcj2bd}}, \code{\link{conv}}.
 #' @export
@@ -271,8 +271,8 @@ wgs2bd <- function(wgsLat, wgsLon){
 #' @param bdLat a numeric latitude in BD-09
 #' @param bdLon a numeric longitude in BD-09
 #' @return a data.frame with variables lat/lng
-#' @author Jun Cai (\email{cai-j12@@mails.tsinghua.edu.cn}), PhD student from 
-#' Center for Earth System Science, Tsinghua University
+#' @author Jun Cai (\email{cai-j12@@mails.tsinghua.edu.cn}), PhD candidate from 
+#' Department of Earth System Science, Tsinghua University
 #' @details convert BD-09 coordinates first into GCJ-02, then into WGS-84.
 #' @seealso \code{\link{bd2gcj}}, \code{\link{gcj2wgs}}, \code{\link{conv}}.
 #' @export

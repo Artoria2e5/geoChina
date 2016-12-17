@@ -16,10 +16,9 @@ and BD-09, which are the GCSs of Google Earth, Google Map in China and Baidu
 Map, respectively. For location out of China, ics is automatically set to 'WGS-84'
 and other values are ignored.}
 
-\item{api}{use google or baidu maps api}
+\item{api}{use Google or Baidu Maps Geocoding API}
 
-\item{key}{an api key must be provided when calling baidu maps api. 
-While it's unnecessary for calling google maps api.}
+\item{key}{an API key must be provided when calling Baidu Maps Geocoding API. When calling Google Maps Geocoding API, you'd better provide an API key, though it is not necessary.}
 
 \item{output}{formatted address or formmatted address with address components}
 
@@ -28,34 +27,34 @@ While it's unnecessary for calling google maps api.}
 \item{time}{the time interval to revgeocode, in seconds. Default value is zero. 
 When you revgeocode multiple locations, set a proper time interval to avoid 
 exceeding usage limits. For details see 
-\url{https://developers.google.com/maps/documentation/business/articles/usage_limits}}
+\url{https://developers.google.com/maps/documentation/geocoding/usage-limits}}
 }
 \value{
 a data.frame with variables address or detail address components
 }
 \description{
-reverse geocodes a lat/lng location using Google or Baidu Maps API.  Note that in 
+reverse geocodes a lat/lng location using Google or Baidu Maps Geocoding API.  Note that in 
 most cases by using this function you are agreeing to the Google Maps API Terms 
 of Service at \url{https://developers.google.com/maps/terms} or the Baidu Maps 
 API Terms of Use at \url{http://developer.baidu.com/map/law.htm}.
 }
 \details{
-note that the google maps api limits to 2500 queries a day.
+note that the google maps api limits to 2,500 free requests per day and 50 requests per second.
 }
 \examples{
 \dontrun{
-# reverse geocode Beijing railway station
-revgeocode(c(39.90105, 116.42079), ics = 'WGS-84', api = 'google', 
+# reverse geocode Beijing Railway Station
+revgeocode(c(39.90358, 116.421), ics = 'WGS-84', api = 'google', 
            output = 'address')
-revgeocode(c(39.90245, 116.42703), ics = 'GCJ-02', api = 'google', 
+revgeocode(c(39.90498, 116.4272), ics = 'GCJ-02', api = 'google', 
            output = 'address', messaging = TRUE)
-revgeocode(c(39.90851, 116.43351), ics = 'BD-09', api = 'google', 
+revgeocode(c(39.91103, 116.4337), ics = 'BD-09', api = 'google', 
            output = 'addressc')
-revgeocode(c(39.90851, 116.43351), ics = 'BD-09', api = 'baidu', 
+revgeocode(c(39.91103, 116.4337), ics = 'BD-09', api = 'baidu', 
            key = 'your baidu maps api key', output = 'address')
-revgeocode(c(39.90245, 116.42703), ics = 'GCJ-02', api = 'baidu', 
+revgeocode(c(39.90498, 116.4272), ics = 'GCJ-02', api = 'baidu', 
            key = 'your baidu maps api key', output = 'address', messaging = TRUE)
-revgeocode(c(39.90105, 116.42079), ics = 'WGS-84', api = 'baidu', 
+revgeocode(c(39.90358, 116.421), ics = 'WGS-84', api = 'baidu', 
            key = 'your baidu maps api key', output = 'addressc')
 # reverse geocode multiple locations
 latlng = data.frame(lat = c(39.99837, 39.98565), lng = c(116.3203, 116.2998))
@@ -64,13 +63,13 @@ revgeocode(latlng, ics = 'WGS-84', api = 'google', output = 'address', time = 2)
 }
 }
 \author{
-Jun Cai (\email{cai-j12@mails.tsinghua.edu.cn}), PhD student from 
-Center for Earth System Science, Tsinghua University
+Jun Cai (\email{cai-j12@mails.tsinghua.edu.cn}), PhD candidate from 
+Department of Earth System Science, Tsinghua University
 }
 \seealso{
 \code{\link{geocode}}, \code{\link{geohost}}.
 
-Google Maps API at \url{http://code.google.com/apis/maps/documentation/geocoding/} 
-and Baidu Maps API at \url{http://developer.baidu.com/map/webservice-geocoding.htm}
+Google Maps API at \url{https://developers.google.com/maps/documentation/geocoding/} 
+and Baidu Maps API at \url{http://lbsyun.baidu.com/index.php?title=webapi/guide/webservice-geocoding}
 }
 

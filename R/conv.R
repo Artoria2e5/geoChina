@@ -8,14 +8,14 @@
 #' @param lon a numeric longitude
 #' @param from the inputting GCS
 #' @param to the outputting GCS
-#' @param api use baidu maps api. Note that baidu maps api only supports the 
+#' @param api use Baidu Maps API. Note that Baidu Maps API only supports the 
 #' transformations from WGS-84 or GCJ-02 to BD-09. Other coodinate conversions 
 #' must be done locally. As the conversion result is the same, it's recommended 
 #' to perform conversions locally.
 #' @return a data.frame with variables lat/lng 
-#' @author Jun Cai (\email{cai-j12@@mails.tsinghua.edu.cn}), PhD student from 
-#' Center for Earth System Science, Tsinghua University
-#' @details note that the baidu maps api limits to 20 lat/lon coordinates per query. 
+#' @author Jun Cai (\email{cai-j12@@mails.tsinghua.edu.cn}), PhD candidate from 
+#' Department of Earth System Science, Tsinghua University
+#' @details note that the Baidu Maps API limits to 20 lat/lon coordinates per query. 
 #' Since the coordinate conversion results of Baidu Maps API and local algorithms 
 #' are the same, it is recommended to use local algorithms.
 #' @seealso \code{\link{wgs2gcj}}, \code{\link{wgs2bd}}, \code{\link{gcj2wgs}}, 
@@ -59,15 +59,15 @@ conv <- function(lat, lon, from = c('WGS-84', 'GCJ-02', 'BD-09'),
   stopifnot(is.logical(api))
   
   # vectorize
-  if(length(lat) > 1){
+  if (length(lat) > 1) {
     return(ldply(seq_along(lat), function(i){conv(lat[i], lon[i], from = from, 
                                                   to = to, api = api) }))
   }
   
-  if(from == to){
+  if (from == to) {
     return(data.frame(lat = lat, lng = lon))
   } else{
-    if(api){
+    if (api) {
       # coordinate system lookup table
       code <- c(0, 2, 4)
       names(code) <- c('WGS-84', 'GCJ-02', 'BD-09')
@@ -87,8 +87,8 @@ conv <- function(lat, lon, from = c('WGS-84', 'GCJ-02', 'BD-09'),
       close(con)
       
       # did convert fail?
-      if(is.list(cv)){
-        if(cv$error == 0){
+      if (is.list(cv)) {
+        if (cv$error == 0) {
           cvdf <- with(cv, {data.frame(lat = as.numeric(base64(y, FALSE)), 
                                        lng = as.numeric(base64(x, FALSE)), 
                                        row.names = NULL)})
@@ -102,12 +102,12 @@ conv <- function(lat, lon, from = c('WGS-84', 'GCJ-02', 'BD-09'),
         return(data.frame(lat = NA, lng = NA))
       }
     } else{
-      if(from == 'WGS-84' & to == 'GCJ-02') return(wgs2gcj(lat, lon))
-      if(from == 'WGS-84' & to == 'BD-09') return(wgs2bd(lat, lon))
-      if(from == 'GCJ-02' & to == 'WGS-84') return(gcj2wgs(lat, lon))
-      if(from == 'GCJ-02' & to == 'BD-09') return(gcj2bd(lat, lon))
-      if(from == 'BD-09' & to == 'WGS-84') return(bd2wgs(lat, lon))
-      if(from == 'BD-09' & to == 'GCJ-02') return(bd2gcj(lat, lon))
+      if (from == 'WGS-84' & to == 'GCJ-02') return(wgs2gcj(lat, lon))
+      if (from == 'WGS-84' & to == 'BD-09') return(wgs2bd(lat, lon))
+      if (from == 'GCJ-02' & to == 'WGS-84') return(gcj2wgs(lat, lon))
+      if (from == 'GCJ-02' & to == 'BD-09') return(gcj2bd(lat, lon))
+      if (from == 'BD-09' & to == 'WGS-84') return(bd2wgs(lat, lon))
+      if (from == 'BD-09' & to == 'GCJ-02') return(bd2gcj(lat, lon))
     }
   }
 }

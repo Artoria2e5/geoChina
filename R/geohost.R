@@ -10,9 +10,9 @@
 #' @return a vector with information of ip, country_code, country_name, region_code, 
 #' city, zip_code, time_zone, latitude, longitude and metro_code for freegeoip.net API, 
 #' of ip, hostname, city, region, country, loc, org, postal and phone for ipinfo.io 
-#' IP lookup API. If numerous IPs are inputted, a data.frame is returned. 
-#' @author Jun Cai (\email{cai-j12@@mails.tsinghua.edu.cn}), PhD student from 
-#' Center for Earth System Science, Tsinghua University
+#' IP lookup API. If numerous IPs are input, a data.frame is returned. 
+#' @author Jun Cai (\email{cai-j12@@mails.tsinghua.edu.cn}), PhD candidate from 
+#' Department of Earth System Science, Tsinghua University
 #' @details note that freegeoip.net API is allowed up to 10,000 queries per hour 
 #' by default, ipinfo API is limited to 1,000 requests per day.
 #' @seealso \code{\link{geocode}}, \code{\link{revgeocode}}.

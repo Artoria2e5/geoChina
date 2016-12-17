@@ -17,7 +17,7 @@ freegeoip.net is used.}
 a vector with information of ip, country_code, country_name, region_code, 
 city, zip_code, time_zone, latitude, longitude and metro_code for freegeoip.net API, 
 of ip, hostname, city, region, country, loc, org, postal and phone for ipinfo.io 
-IP lookup API. If numerous IPs are inputted, a data.frame is returned.
+IP lookup API. If numerous IPs are input, a data.frame is returned.
 }
 \description{
 geocodes an IP address using either freegeoip.net \url{http://freegeoip.net} or 
@@ -41,8 +41,8 @@ geohost(ip = c("61.135.169.81", "12.215.42.19"), api = "ipinfo.io")
 }
 }
 \author{
-Jun Cai (\email{cai-j12@mails.tsinghua.edu.cn}), PhD student from 
-Center for Earth System Science, Tsinghua University
+Jun Cai (\email{cai-j12@mails.tsinghua.edu.cn}), PhD candidate from 
+Department of Earth System Science, Tsinghua University
 }
 \seealso{
 \code{\link{geocode}}, \code{\link{revgeocode}}.

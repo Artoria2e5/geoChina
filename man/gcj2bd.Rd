@@ -18,8 +18,8 @@ a data.frame with variables lat/lng
 converts lat/lon coordintes from GCJ-02 to BD-09
 }
 \details{
-BD-09 coordinate system is used by Baidu Maps and encrypted based on 
-GCJ-02 coordinates for information safety.
+BD-09 coordinate system is used by Baidu Maps and further encrypted based on 
+GCJ-02 coordinates.
 }
 \examples{
 \dontrun{
@@ -32,8 +32,8 @@ gcj2bd(c(39.99967, 39.98691), c(116.3264, 116.3059))
 }
 }
 \author{
-Jun Cai (\email{cai-j12@mails.tsinghua.edu.cn}), PhD student from 
-Center for Earth System Science, Tsinghua University
+Jun Cai (\email{cai-j12@mails.tsinghua.edu.cn}), PhD candidate from 
+Department of Earth System Science, Tsinghua University
 }
 \seealso{
 \code{\link{bd2gcj}}, \code{\link{conv}}.

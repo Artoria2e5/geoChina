@@ -1,15 +1,14 @@
 #' Geocode
 #'
-#' geocodes an address using Google or Baidu Maps API. Note that in most cases by 
+#' geocodes an address using Google or Baidu Maps Geocoding API. Note that in most cases by 
 #' using this function you are agreeing to the Google Maps API Terms of Service 
 #' at \url{https://developers.google.com/maps/terms} or the Baidu Maps API Terms 
 #' of Use at \url{http://developer.baidu.com/map/law.htm}.
 #' 
 #' @param address a character vector specifying a location of interest (e.g., 
-#' "Tsinghua Univeristy").
-#' @param api use Google or Baidu Maps API. When using Baidu Maps API, the address must be in Chinese.
-#' @param key an api key must be provided when calling baidu maps api. 
-#' While it's unnecessary for calling google maps api.
+#' "Beijing Railway Station").
+#' @param api use Google or Baidu Maps Geocoding API. When using Baidu Maps Geocoding API, the address must be in Chinese.
+#' @param key an API key must be provided when calling Baidu Maps Geocoding API. When calling Google Maps Geocoding API, you'd better provide an API key, though it is not necessary.
 #' @param ocs output coordinate systems including WGS-84, GCJ-02 and BD-09, which
 #' are the GCSs of Google Earth, Google Map in China and Baidu Map, respectively. 
 #' For address out of China, ocs is automatically set to 'WGS-84' and other values 
@@ -19,44 +18,44 @@
 #' @param time the time interval to geocode, in seconds. Default value is zero. 
 #' When you geocode multiple addresses, set a proper time interval to avoid 
 #' exceeding usage limits. For details see 
-#' \url{https://developers.google.com/maps/documentation/business/articles/usage_limits}
+#' \url{https://developers.google.com/maps/documentation/geocoding/usage-limits}
 #' @return a data.frame with variables lat/lng or lat/lng/conf 
-#' @author Jun Cai (\email{cai-j12@@mails.tsinghua.edu.cn}), PhD student from 
-#' Center for Earth System Science, Tsinghua University
-#' @details note that the google maps api limits to 2500 queries a day.
+#' @author Jun Cai (\email{cai-j12@@mails.tsinghua.edu.cn}), PhD candidate from 
+#' Department of Earth System Science, Tsinghua University
+#' @details note that the google maps api limits to 2,500 free requests per day and 50 requests per second.
 #' @seealso \code{\link{revgeocode}}, \code{\link{geohost}}.
 #' 
-#' Google Maps API at \url{http://code.google.com/apis/maps/documentation/geocoding/} 
-#' and Baidu Maps API at \url{http://developer.baidu.com/map/webservice-geocoding.htm}
+#' Google Maps API at \url{https://developers.google.com/maps/documentation/geocoding/} 
+#' and Baidu Maps API at \url{http://lbsyun.baidu.com/index.php?title=webapi/guide/webservice-geocoding}
 #' @export
 #' @import plyr
 #' @importFrom utils URLencode
 #' @examples
 #' \dontrun{
-#' geocode('Tsinghua University', api = 'google', ocs = 'GCJ-02')
-#' geocode('Tsinghua University', api = 'google', ocs = 'WGS-84', 
+#' geocode('Beijing Railway Station', api = 'google', ocs = 'GCJ-02')
+#' geocode('Beijing Railway Station', api = 'google', ocs = 'WGS-84', 
 #'         messaging = TRUE)
-#' geocode('Beijing railway station', api = 'google', ocs = 'WGS-84', 
+#' geocode('Beijing Railway Station', api = 'google', ocs = 'WGS-84', 
 #'         output = 'latlngc')
-#' geocode('Beijing railway station', api = 'google', ocs = 'WGS-84', 
+#' geocode('Beijing Railway Station', api = 'google', ocs = 'WGS-84', 
 #'         output = 'latlnga')
-#' geocode(c('Tsinghua University', 'Beijing railway station'), api = 'google', 
+#' geocode(c('Beijing Railway Station', 'Beijingxi Railway Station'), api = 'google', 
 #'         ocs = 'GCJ-02')
-#' geocode(c('Tsinghua University', 'Beijing railway station'), api = 'google', 
+#' geocode(c('Beijing Railway Station', 'Beijingxi Railway Station'), api = 'google', 
 #'         ocs = 'WGS-84', output = 'latlngc', messaging = TRUE)
-#' geocode(c('Tsinghua University', 'Beijing railway station'), api = 'google', 
+#' geocode(c('Beijing Railway Station', 'Beijingxi Railway Station'), api = 'google', 
 #'         ocs = 'WGS-84', output = 'latlnga', messaging = TRUE)
-#' geocode(c('Tsinghua University', 'Beijing railway station'), api = 'google', 
+#' geocode(c('Beijing Railway Station', 'Beijingxi Railway Station'), api = 'google', 
 #'         ocs = 'WGS-84', output = 'latlngc', messaging = TRUE, time = 2)
-#' geocode('Beijing railway station', api = 'baidu', key = 'your baidu maps api key', 
+#' geocode('Beijing Railway Station', api = 'baidu', key = 'your baidu maps api key', 
 #' ocs = 'BD-09')
-#' geocode('Beijing railway station', api = 'baidu', key = 'your baidu maps api key', 
+#' geocode('Beijing Railway Station', api = 'baidu', key = 'your baidu maps api key', 
 #' ocs = 'GCJ-02', messaging = TRUE)
-#' geocode('Beijing railway station', api = 'baidu', key = 'your baidu maps api key', 
+#' geocode('Beijing Railway Station', api = 'baidu', key = 'your baidu maps api key', 
 #' ocs = 'BD-09', output = 'latlngc')
-#' geocode(c('Tsinghua University', 'Beijing railway station'), api = 'baidu', 
+#' geocode(c('Beijing Railway Station', 'Beijingxi Railway Station'), api = 'baidu', 
 #' key = 'your baidu maps api key', ocs = 'BD-09')
-#' geocode(c('Tsinghua University', 'Beijing railway station'), api = 'baidu', 
+#' geocode(c('Beijing Railway Station', 'Beijingxi Railway Station'), api = 'baidu', 
 #' key = 'your baidu maps api key', ocs = 'WGS-84', output = 'latlngc')
 #' }
 
@@ -96,7 +95,7 @@ geocode <- function(address, api = c('google', 'baidu'), key = '',
     if (cname == "CN") {
       api_url <- 'http://ditu.google.cn/maps/api/geocode/json'
     } else{
-      api_url <- 'http://maps.googleapis.com/maps/api/geocode/json'
+      api_url <- 'https://maps.googleapis.com/maps/api/geocode/json'
     }
   } else{
     api_url <- 'http://api.map.baidu.com/geocoder/v2/'
@@ -109,7 +108,7 @@ geocode <- function(address, api = c('google', 'baidu'), key = '',
     # http://maps.googleapis.com/maps/api/geocode/json?address=ADDRESS&sensor
     # =false&key=API_KEY for outside China
     # http://ditu.google.cn/maps/api/geocode/json?address=ADDRESS&sensor
-    # =false&key=API_KEY for outside China
+    # =false&key=API_KEY for inside China
     url_string <- paste(api_url, '?address=', address, '&sensor=false', sep = '')
     if (nchar(key) > 0) {
       url_string <- paste(url_string, '&key=', key, sep = '')

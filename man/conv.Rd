@@ -16,7 +16,7 @@ conv(lat, lon, from = c("WGS-84", "GCJ-02", "BD-09"), to = c("WGS-84",
 
 \item{to}{the outputting GCS}
 
-\item{api}{use baidu maps api. Note that baidu maps api only supports the 
+\item{api}{use Baidu Maps API. Note that Baidu Maps API only supports the 
 transformations from WGS-84 or GCJ-02 to BD-09. Other coodinate conversions 
 must be done locally. As the conversion result is the same, it's recommended 
 to perform conversions locally.}
@@ -30,7 +30,7 @@ GCS including WGS-84, GCJ-02 and BD-09 either locally or by calling Baidu
 Maps API.
 }
 \details{
-note that the baidu maps api limits to 20 lat/lon coordinates per query. 
+note that the Baidu Maps API limits to 20 lat/lon coordinates per query. 
 Since the coordinate conversion results of Baidu Maps API and local algorithms 
 are the same, it is recommended to use local algorithms.
 }
@@ -62,8 +62,8 @@ conv(lat, lng, from = 'WGS-84', to = 'GCJ-02')
 }
 }
 \author{
-Jun Cai (\email{cai-j12@mails.tsinghua.edu.cn}), PhD student from 
-Center for Earth System Science, Tsinghua University
+Jun Cai (\email{cai-j12@mails.tsinghua.edu.cn}), PhD candidate from 
+Department of Earth System Science, Tsinghua University
 }
 \seealso{
 \code{\link{wgs2gcj}}, \code{\link{wgs2bd}}, \code{\link{gcj2wgs}}, 

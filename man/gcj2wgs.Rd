@@ -37,8 +37,8 @@ gcj2wgs(c(39.99967, 39.98691), c(116.3264, 116.3059))
 }
 }
 \author{
-Jun Cai (\email{cai-j12@mails.tsinghua.edu.cn}), PhD student from 
-Center for Earth System Science, Tsinghua University
+Jun Cai (\email{cai-j12@mails.tsinghua.edu.cn}), PhD candidate from 
+Department of Earth System Science, Tsinghua University
 }
 \seealso{
 \code{\link{wgs2gcj}}, \code{\link{conv}}.
