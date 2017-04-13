@@ -167,17 +167,17 @@ geocode <- function(address, api = c('google', 'baidu'), key = '',
       route <- 
         tolower(NULLtoNA(attrdf$long_name[attrdf$types == 'route']))
       subloc_l3 <- 
-        tolower(NULLtoNA(attrdf$long_name[attrdf$types == 'sublocality_level_3'])) # 村
+        tolower(NULLtoNA(attrdf$long_name[attrdf$types == 'sublocality_level_3'])) # village
       subloc_l2 <- 
-        tolower(NULLtoNA(attrdf$long_name[attrdf$types == 'sublocality_level_2'])) # 镇
+        tolower(NULLtoNA(attrdf$long_name[attrdf$types == 'sublocality_level_2'])) # township
       subloc_l1 <- 
-        tolower(NULLtoNA(attrdf$long_name[attrdf$types == 'sublocality_level_1'])) # 区|县
+        tolower(NULLtoNA(attrdf$long_name[attrdf$types == 'sublocality_level_1'])) # district|county
       locality <- 
-        tolower(NULLtoNA(attrdf$long_name[attrdf$types == 'locality'])) # 地级市
+        tolower(NULLtoNA(attrdf$long_name[attrdf$types == 'locality'])) # prefecture
       admin_area_l2 <- 
         tolower(NULLtoNA(attrdf$long_name[attrdf$types == 'administrative_area_level_2'])) # US county
       admin_area_l1 <- 
-        tolower(NULLtoNA(attrdf$long_name[attrdf$types == 'administrative_area_level_1'])) # 省|直辖市 or US state
+        tolower(NULLtoNA(attrdf$long_name[attrdf$types == 'administrative_area_level_1'])) # province | municipality or US state
       country <- 
         tolower(NULLtoNA(attrdf$long_name[attrdf$types == 'country']))      
       postal_code <- 

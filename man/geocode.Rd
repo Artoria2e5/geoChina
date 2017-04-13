@@ -71,14 +71,13 @@ geocode(c('Beijing Railway Station', 'Beijingxi Railway Station'), api = 'baidu'
 key = 'your baidu maps api key', ocs = 'WGS-84', output = 'latlngc')
 }
 }
-\author{
-Jun Cai (\email{cai-j12@mails.tsinghua.edu.cn}), PhD candidate from 
-Department of Earth System Science, Tsinghua University
-}
 \seealso{
 \code{\link{revgeocode}}, \code{\link{geohost}}.
 
 Google Maps API at \url{https://developers.google.com/maps/documentation/geocoding/} 
 and Baidu Maps API at \url{http://lbsyun.baidu.com/index.php?title=webapi/guide/webservice-geocoding}
 }
-
+\author{
+Jun Cai (\email{cai-j12@mails.tsinghua.edu.cn}), PhD candidate from 
+Department of Earth System Science, Tsinghua University
+}

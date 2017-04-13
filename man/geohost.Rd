@@ -40,10 +40,6 @@ geohost(ip = c("61.135.169.81", "12.215.42.19"))
 geohost(ip = c("61.135.169.81", "12.215.42.19"), api = "ipinfo.io")
 }
 }
-\author{
-Jun Cai (\email{cai-j12@mails.tsinghua.edu.cn}), PhD candidate from 
-Department of Earth System Science, Tsinghua University
-}
 \seealso{
 \code{\link{geocode}}, \code{\link{revgeocode}}.
 
@@ -51,4 +47,7 @@ freegeoip.net IP lookup API at \url{http://freegeoip.net}
 
 ipinfo.io IP lookup API at \url{http://ipinfo.io/developers}
 }
-
+\author{
+Jun Cai (\email{cai-j12@mails.tsinghua.edu.cn}), PhD candidate from 
+Department of Earth System Science, Tsinghua University
+}

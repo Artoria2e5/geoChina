@@ -34,14 +34,13 @@ wgs2gcj(39.90105, 116.42079) # correct
 wgs2gcj(c(39.99837, 39.98565), c(116.3203, 116.2998))
 }
 }
-\author{
-Jun Cai (\email{cai-j12@mails.tsinghua.edu.cn}), PhD candidate from 
-Department of Earth System Science, Tsinghua University
-}
 \seealso{
 \code{\link{gcj2wgs}}, \code{\link{conv}}.
 
 \url{https://on4wp7.codeplex.com/SourceControl/changeset/view/21483#353936} 
 for C version source code.
 }
-
+\author{
+Jun Cai (\email{cai-j12@mails.tsinghua.edu.cn}), PhD candidate from 
+Department of Earth System Science, Tsinghua University
+}

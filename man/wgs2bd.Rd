@@ -30,11 +30,10 @@ wgs2bd(39.90105, 116.42079) # correct
 wgs2bd(c(39.99837, 39.98565), c(116.3203, 116.2998))
 }
 }
+\seealso{
+\code{\link{wgs2gcj}}, \code{\link{gcj2bd}}, \code{\link{conv}}.
+}
 \author{
 Jun Cai (\email{cai-j12@mails.tsinghua.edu.cn}), PhD candidate from 
 Department of Earth System Science, Tsinghua University
 }
-\seealso{
-\code{\link{wgs2gcj}}, \code{\link{gcj2bd}}, \code{\link{conv}}.
-}
-

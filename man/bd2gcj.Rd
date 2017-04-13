@@ -31,14 +31,13 @@ bd2gcj(39.90851, 116.43351) # correct
 bd2gcj(c(40.00541, 39.99299), c(116.3330, 116.3124))
 }
 }
-\author{
-Jun Cai (\email{cai-j12@mails.tsinghua.edu.cn}), PhD candidate from 
-Department of Earth System Science, Tsinghua University
-}
 \seealso{
 \code{\link{gcj2bd}}, \code{\link{conv}}.
 
 \url{http://blog.csdn.net/coolypf/article/details/8569813} for C version 
 source code.
 }
-
+\author{
+Jun Cai (\email{cai-j12@mails.tsinghua.edu.cn}), PhD candidate from 
+Department of Earth System Science, Tsinghua University
+}

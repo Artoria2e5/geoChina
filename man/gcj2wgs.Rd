@@ -36,14 +36,13 @@ gcj2wgs(39.90245, 116.42703) # correct verifying by google earth
 gcj2wgs(c(39.99967, 39.98691), c(116.3264, 116.3059))
 }
 }
-\author{
-Jun Cai (\email{cai-j12@mails.tsinghua.edu.cn}), PhD candidate from 
-Department of Earth System Science, Tsinghua University
-}
 \seealso{
 \code{\link{wgs2gcj}}, \code{\link{conv}}.
 
 the comments of blog \url{http://blog.csdn.net/coolypf/article/details/8686588} 
 in Chinese
 }
-
+\author{
+Jun Cai (\email{cai-j12@mails.tsinghua.edu.cn}), PhD candidate from 
+Department of Earth System Science, Tsinghua University
+}

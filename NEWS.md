@@ -1,3 +1,10 @@
+# CHANGES IN geoChina VERSION 1.3.1
+
+## BUG FIXES
+
+- replaced Chinese comments with English comments to fix [issue #6](https://github.com/caijun/geoChina/issues/6).
+
+
 # CHANGES IN geoChina VERSION 1.3.0
 
 ## NEW FEATURES

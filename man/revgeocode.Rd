@@ -62,14 +62,13 @@ revgeocode(latlng, ics = 'WGS-84', api = 'google', output = 'address')
 revgeocode(latlng, ics = 'WGS-84', api = 'google', output = 'address', time = 2)
 }
 }
-\author{
-Jun Cai (\email{cai-j12@mails.tsinghua.edu.cn}), PhD candidate from 
-Department of Earth System Science, Tsinghua University
-}
 \seealso{
 \code{\link{geocode}}, \code{\link{geohost}}.
 
 Google Maps API at \url{https://developers.google.com/maps/documentation/geocoding/} 
 and Baidu Maps API at \url{http://lbsyun.baidu.com/index.php?title=webapi/guide/webservice-geocoding}
 }
-
+\author{
+Jun Cai (\email{cai-j12@mails.tsinghua.edu.cn}), PhD candidate from 
+Department of Earth System Science, Tsinghua University
+}

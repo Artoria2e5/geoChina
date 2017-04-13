@@ -61,12 +61,11 @@ lng = c(116.3203, 116.2998)
 conv(lat, lng, from = 'WGS-84', to = 'GCJ-02')
 }
 }
-\author{
-Jun Cai (\email{cai-j12@mails.tsinghua.edu.cn}), PhD candidate from 
-Department of Earth System Science, Tsinghua University
-}
 \seealso{
 \code{\link{wgs2gcj}}, \code{\link{wgs2bd}}, \code{\link{gcj2wgs}}, 
 \code{\link{gcj2bd}}, \code{\link{bd2wgs}}, \code{\link{bd2gcj}}.
 }
-
+\author{
+Jun Cai (\email{cai-j12@mails.tsinghua.edu.cn}), PhD candidate from 
+Department of Earth System Science, Tsinghua University
+}
