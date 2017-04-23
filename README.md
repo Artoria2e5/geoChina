@@ -13,6 +13,7 @@ In China the digital maps use two main Geographic Coordinate Systems (GCSs), nam
 Install the latest development version from GitHub (`devtools` package is required):
 
 ```r
+if (!requireNamespace("devtools")) install.packages("devtools")
 devtools::install_github("caijun/geoChina")
 ```
 
