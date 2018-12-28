@@ -1,3 +1,3 @@
 library(testthat)
 
-test_check("geoChina")
+# test_check("geoChina")
