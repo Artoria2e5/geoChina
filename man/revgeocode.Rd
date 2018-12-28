@@ -4,9 +4,9 @@
 \alias{revgeocode}
 \title{Reverse geocode}
 \usage{
-revgeocode(latlng, ics = c("WGS-84", "GCJ-02", "BD-09"), api = c("google",
-  "baidu"), key = "", output = c("address", "addressc"),
-  messaging = FALSE, time = 0)
+revgeocode(latlng, ics = c("WGS-84", "GCJ-02", "BD-09"),
+  api = c("google", "baidu"), key = "", output = c("address",
+  "addressc"), messaging = FALSE, time = 0)
 }
 \arguments{
 \item{latlng}{a location in latitude/longitude format}

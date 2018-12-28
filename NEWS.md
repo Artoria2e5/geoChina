@@ -1,3 +1,10 @@
+# CHANGES IN geoChina VERSION 1.3.2
+
+## BUG FIXES
+
+- Load the Google Geocode API with "https://" instead of "http://".
+
+
 # CHANGES IN geoChina VERSION 1.3.1
 
 ## BUG FIXES

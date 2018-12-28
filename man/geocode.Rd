@@ -4,9 +4,9 @@
 \alias{geocode}
 \title{Geocode}
 \usage{
-geocode(address, api = c("google", "baidu"), key = "", ocs = c("WGS-84",
-  "GCJ-02", "BD-09"), output = c("latlng", "latlngc", "latlnga"),
-  messaging = FALSE, time = 0)
+geocode(address, api = c("google", "baidu"), key = "",
+  ocs = c("WGS-84", "GCJ-02", "BD-09"), output = c("latlng", "latlngc",
+  "latlnga"), messaging = FALSE, time = 0)
 }
 \arguments{
 \item{address}{a character vector specifying a location of interest (e.g., 

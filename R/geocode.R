@@ -93,7 +93,7 @@ geocode <- function(address, api = c('google', 'baidu'), key = '',
   if (api == 'google') {
     cname <- ip.country()
     if (cname == "CN") {
-      api_url <- 'http://ditu.google.cn/maps/api/geocode/json'
+      api_url <- 'https://ditu.google.cn/maps/api/geocode/json'
     } else{
       api_url <- 'https://maps.googleapis.com/maps/api/geocode/json'
     }
@@ -105,9 +105,9 @@ geocode <- function(address, api = c('google', 'baidu'), key = '',
   # command line option. without this option, or on Mac, you will get the error 
   # "unsupported URL scheme".
   if (api == 'google') {
-    # http://maps.googleapis.com/maps/api/geocode/json?address=ADDRESS&sensor
+    # https://maps.googleapis.com/maps/api/geocode/json?address=ADDRESS&sensor
     # =false&key=API_KEY for outside China
-    # http://ditu.google.cn/maps/api/geocode/json?address=ADDRESS&sensor
+    # https://ditu.google.cn/maps/api/geocode/json?address=ADDRESS&sensor
     # =false&key=API_KEY for inside China
     url_string <- paste(api_url, '?address=', address, '&sensor=false', sep = '')
     if (nchar(key) > 0) {
